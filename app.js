@@ -29,15 +29,15 @@
  * scissors loses to rock
  
  * keep playing the game until the game has been played 5 times
+ * 
  * declare a winner
  */
 
-
 const getCompChoice = function(){
-    let option = ["rock","paper","scissor"]
+    let option = ["rock","paper","scissors"]
     let randomNum = Math.floor(Math.random() * 3)
     let choice = option[randomNum]
-    return 'rock'
+    return choice
 }
 
 const getHumanChoice = function(){
@@ -45,27 +45,41 @@ const getHumanChoice = function(){
     return userInput
 }
 
-
-const playRound = (humanChoice,compChoice) => {
-    let humanScore = 0
-    let compScore = 0
-
-
-    console.log(`Computer choice: ${compChoice}`)
-    if(humanChoice === compChoice){
+// helper function
+function playRound(humanChoice,compChoice){
+    if(humanChoice && humanChoice === compChoice){
         console.log("It's a tie.")
-    } else if ((humanChoice === 'rock' && compChoice === 'scissors') || (humanChoice === 'paper' && compChoice === 'rock')){
+    } else if ((humanChoice && humanChoice === 'rock' && compChoice === 'scissors') || (humanChoice === 'paper' && compChoice === 'rock')){
         console.log(`You win! ${humanChoice} beats ${compChoice}.`)
-        
-    }else if(humanChoice === 'scissors' && compChoice === 'paper'){
+        return 1
+    } else if(humanChoice && humanChoice === 'scissors' && compChoice === 'paper'){
         console.log(`You win! ${humanChoice} beats ${compChoice}.`)
-    } else {
+        return 1
+    } else if(humanChoice) {
         console.log(`You lose! ${compChoice} beats ${humanChoice}.`)
+        return 0
     }
-
 }
 
+playGame = (func) => {
+    let humanScore = 0
+    let compScore = 0
+    let rounds = 5
+    while (rounds > 1){
+        if(func === 1){
+            humanScore++
+            console.log("Human score: " + humanScore)
+            playRound(getHumanChoice(),getCompChoice())
+        }  else if(func === 0) {
+            compScore++
+            console.log(compScore)
+            console.log("Computer score: " + compScore)
+            playRound(getHumanChoice(),getCompChoice())
+        }  else {
+            playRound(getHumanChoice(),getCompChoice())
+        }
+        rounds--
+    }
+}
 
-playRound(getHumanChoice(),getCompChoice())
-
-const playGame = () => {}
+playGame(playRound(getHumanChoice(),getCompChoice()))
