@@ -49,6 +49,7 @@ const getHumanChoice = function(){
 function playRound(humanChoice,compChoice){
     if(humanChoice && humanChoice === compChoice){
         console.log("It's a tie.")
+        return 2
     } else if ((humanChoice && humanChoice === 'rock' && compChoice === 'scissors') || (humanChoice === 'paper' && compChoice === 'rock')){
         console.log(`You win! ${humanChoice} beats ${compChoice}.`)
         return 1
@@ -75,7 +76,8 @@ playGame = (func) => {
             console.log(compScore)
             console.log("Computer score: " + compScore)
             playRound(getHumanChoice(),getCompChoice())
-        }  else {
+        }  else if(func === 2) {
+            console.log(func)
             playRound(getHumanChoice(),getCompChoice())
         }
         rounds--
