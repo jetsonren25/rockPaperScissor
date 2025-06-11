@@ -33,7 +33,9 @@
  * declare a winner
  */
 
-let ties = 0
+
+let humanScore = 0
+let compScore = 0
 let rounds = 5
 
 const getCompChoice = function(){
@@ -50,11 +52,13 @@ const getHumanChoice = function(){
 
 
 function playRound(computerChoice,humanChoice){
-    if(humanChoice === computerChoice){
+    let lowerCaseHumanChoice = humanChoice.toLowerCase()
+    console.log(humanChoice)
+    if(lowerCaseHumanChoice === computerChoice){
         return 'tie'
-    } else if (humanChoice === 'rock' && computerChoice === 'scissors' || humanChoice === 'paper' && computerChoice === 'rock'){
+    } else if (lowerCaseHumanChoice === 'rock' && computerChoice === 'scissors' || lowerCaseHumanChoice === 'paper' && computerChoice === 'rock'){
         return 'human'
-    } else if(humanChoice === 'scissors' && computerChoice === 'paper'){
+    } else if(lowerCaseHumanChoice === 'scissors' && computerChoice === 'paper'){
         return 'human' 
     } else {
         return 'comp'
@@ -62,19 +66,17 @@ function playRound(computerChoice,humanChoice){
 }
 
 playGame = (func) => {
-    let humanScore = 0
-    let compScore = 0
-    
     while(rounds > 1){
         switch (func) {
             case 'tie':
-                ties++
                 alert('Tie')
                 break;
             case 'human':
+                alert('Human victory')
                 humanScore++
                 break;
             case 'comp':
+                alert('Sentient victory')
                 compScore++
                 break;
             default:
@@ -84,9 +86,9 @@ playGame = (func) => {
         playGame(playRound(getCompChoice(),getHumanChoice()))
     }
 
-    humanScore > compScore ? alert(`Human wins. Human: ${humanScore + 1} - Computer: ${compScore}`) : alert(`Computer wins. Human: ${humanScore} - Computer: ${compScore + 1}`)
 }
 
 playGame(playRound(getCompChoice(),getHumanChoice()))
+humanScore > compScore ? alert(`Human wins. Human: ${humanScore + 1} - Computer: ${compScore}`) : alert(`Computer wins. Human: ${humanScore} - Computer: ${compScore + 1}`)
 
 
