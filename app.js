@@ -33,55 +33,60 @@
  * declare a winner
  */
 
+let ties = 0
+let rounds = 5
+
 const getCompChoice = function(){
-    let option = ["rock","paper","scissors"]
+    let options = ["rock","paper","scissors"]
     let randomNum = Math.floor(Math.random() * 3)
-    let choice = option[randomNum]
+    let choice = options[randomNum]
     return choice
 }
 
 const getHumanChoice = function(){
-    let userInput = prompt('Please type rock, paper, or scissor')
+    let userInput = prompt(`Please type rock, paper, or scissors`)
     return userInput
 }
 
-// helper function
-function playRound(humanChoice,compChoice){
-    if(humanChoice && humanChoice === compChoice){
-        console.log("It's a tie.")
-        return 2
-    } else if ((humanChoice && humanChoice === 'rock' && compChoice === 'scissors') || (humanChoice === 'paper' && compChoice === 'rock')){
-        console.log(`You win! ${humanChoice} beats ${compChoice}.`)
-        return 1
-    } else if(humanChoice && humanChoice === 'scissors' && compChoice === 'paper'){
-        console.log(`You win! ${humanChoice} beats ${compChoice}.`)
-        return 1
-    } else if(humanChoice) {
-        console.log(`You lose! ${compChoice} beats ${humanChoice}.`)
-        return 0
+
+function playRound(computerChoice,humanChoice){
+    if(humanChoice === computerChoice){
+        return 'tie'
+    } else if (humanChoice === 'rock' && computerChoice === 'scissors' || humanChoice === 'paper' && computerChoice === 'rock'){
+        return 'human'
+    } else if(humanChoice === 'scissors' && computerChoice === 'paper'){
+        return 'human' 
+    } else {
+        return 'comp'
     }
 }
 
 playGame = (func) => {
     let humanScore = 0
     let compScore = 0
-    let rounds = 5
-    while (rounds > 1){
-        if(func === 1){
-            humanScore++
-            console.log("Human score: " + humanScore)
-            playRound(getHumanChoice(),getCompChoice())
-        }  else if(func === 0) {
-            compScore++
-            console.log(compScore)
-            console.log("Computer score: " + compScore)
-            playRound(getHumanChoice(),getCompChoice())
-        }  else if(func === 2) {
-            console.log(func)
-            playRound(getHumanChoice(),getCompChoice())
-        }
+    
+    while(rounds > 1){
+        switch (func) {
+            case 'tie':
+                ties++
+                alert('Tie')
+                break;
+            case 'human':
+                humanScore++
+                break;
+            case 'comp':
+                compScore++
+                break;
+            default:
+                break;
+            }
         rounds--
+        playGame(playRound(getCompChoice(),getHumanChoice()))
     }
+
+    humanScore > compScore ? alert(`Human wins. Human: ${humanScore + 1} - Computer: ${compScore}`) : alert(`Computer wins. Human: ${humanScore} - Computer: ${compScore + 1}`)
 }
 
-playGame(playRound(getHumanChoice(),getCompChoice()))
+playGame(playRound(getCompChoice(),getHumanChoice()))
+
+
