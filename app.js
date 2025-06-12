@@ -50,13 +50,13 @@ const getHumanChoice = function(){
     return userInput
 }
 
-
 function playRound(computerChoice,humanChoice){
     let lowerCaseHumanChoice = humanChoice.toLowerCase()
     console.log(humanChoice)
     if(lowerCaseHumanChoice === computerChoice){
         return 'tie'
-    } else if (lowerCaseHumanChoice === 'rock' && computerChoice === 'scissors' || lowerCaseHumanChoice === 'paper' && computerChoice === 'rock'){
+    } else if (lowerCaseHumanChoice === 'rock' && computerChoice === 'scissors' || 
+        lowerCaseHumanChoice === 'paper' && computerChoice === 'rock'){
         return 'human'
     } else if(lowerCaseHumanChoice === 'scissors' && computerChoice === 'paper'){
         return 'human' 
