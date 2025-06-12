@@ -65,9 +65,9 @@ function playRound(computerChoice,humanChoice){
     }
 }
 
-playGame = (func) => {
+playGame = (isWinner) => {
     while(rounds > 1){
-        switch (func) {
+        switch (isWinner) {
             case 'tie':
                 alert('Tie')
                 break;
