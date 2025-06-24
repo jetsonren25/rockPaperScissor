@@ -1,6 +1,8 @@
 let body = document.querySelector('body')
 
-let humanScore, compScore, tie = 0
+let humanScore = 0
+let compScore = 0
+let tie = 0
 let rounds = 5
 
 let scoreSpan = document.createElement('span')
@@ -43,12 +45,9 @@ const getCompChoice = function(){
 }
 
 const btns = document.querySelectorAll(".game")
-btns.forEach(btn => {
-    btn.addEventListener('click', (e) =>{playGame(playRound(getCompChoice(),e.target.textContent))})
-})
+btns.forEach(btn => btn.addEventListener('click', (e)=> playGame(playRound(getCompChoice(),e.target.textContent))))
 
 function playRound(computer,human){
-    console.log(`This is the comp: ${computer} and this is the human: ${human}`)
     if(human === computer){
         return 'tie'
     } else if (human === 'rock' && computer === 'scissors' || 
