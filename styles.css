@@ -2,20 +2,26 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 h2 {
-    text-align: center;
-    margin: 75px;
+    margin-top: 50px;
+}
+
+#score{
+    margin: 50px 0px;
 }
 
 #main-cont{
-    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .game{
     font-size: 15px;
-    margin: 10px;
+    margin: 50px 15px;
     border-radius: 10px;
     border: 1px solid gray;
     padding: 5px;
