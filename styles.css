@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h2 {
+    text-align: center;
+    margin: 75px;
+}
+
+#main-cont{
+    text-align: center;
+}
+
+.game{
+    font-size: 15px;
+    margin: 10px;
+    border-radius: 10px;
+    border: 1px solid gray;
+    padding: 5px;
+    background-color: whitesmoke;
+}

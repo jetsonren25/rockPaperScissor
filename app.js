@@ -1,80 +1,75 @@
+let humanScore = 0
+let compScore = 0
+let rounds = 5
+
 let body = document.querySelector('body')
 
+let rpsH2 = document.createElement('h2')
+rpsH2.textContent = 'Rock, Paper, Scissors'
+
+let container = document.createElement('div')
+container.setAttribute('id','main-cont')
+
 let rock = document.createElement('button')
-rock.setAttribute('class','game')
+rock.setAttribute('class','game rock')
 rock.textContent = 'rock'
 
 let paper = document.createElement('button')
-paper.setAttribute('class','game')
+paper.setAttribute('class','game paper')
 paper.textContent = 'paper'
 
 let scissors = document.createElement('button')
-scissors.setAttribute('class','game')
+scissors.setAttribute('class','game scissors')
 scissors.textContent = 'scissors'
 
-body.appendChild(rock)
-body.appendChild(paper)
-body.appendChild(scissors)
+
+
+body.appendChild(rpsH2)
+body.appendChild(container)
+
+container.appendChild(rock)
+container.appendChild(paper)
+container.appendChild(scissors)
 
 // --------- CODE HERE
-const btns = document.querySelectorAll(".game")
-btns.forEach(btn => {
-    btn.addEventListener('click', (e) =>{
-        playRound(e.target.textContent)
-    })
-})
-
-
-
-// let humanScore = 0
-// let compScore = 0
-// // let rounds = 5
 
 const getCompChoice = function(){
     let options = ["rock","paper","scissors"]
-    let randomNum = Math.floor(Math.random() * 3)
-    let choice = options[randomNum]
-    return choice
+    return options[Math.floor(Math.random() * 3)]
 }
 
-// function playRound(computerChoice,humanChoice){
-//     // let lowerCaseHumanChoice = humanChoice.toLowerCase()
-//     if(lowerCaseHumanChoice === computerChoice){
-//         return 'tie'
-//     } else if (lowerCaseHumanChoice === 'rock' && computerChoice === 'scissors' || 
-//         lowerCaseHumanChoice === 'paper' && computerChoice === 'rock'){
-//         return 'human'
-//     } else if(lowerCaseHumanChoice === 'scissors' && computerChoice === 'paper'){
-//         return 'human' 
-//     } else {
-//         return 'comp'
-//     }
-// }
+const btns = document.querySelectorAll(".game")
+let humanChoice = ''
+btns.forEach(btn => {
+    btn.addEventListener('click', (e) =>{playGame(playRound(getCompChoice(),e.target.textContent))})
+})
 
-// playGame = (isWinner) => {
-//     while(rounds > 1){
-//         switch (isWinner) {
-//             case 'tie':
-//                 alert('Tie')
-//                 break;
-//             case 'human':
-//                 alert('Human victory')
-//                 humanScore++
-//                 break;
-//             case 'comp':
-//                 alert('Sentient victory')
-//                 compScore++
-//                 break;
-//             default:
-//                 break;
-//             }
-//         rounds--
-//         playGame(playRound(getCompChoice(),getHumanChoice()))
-//     }
+function playRound(computer,human){
+    console.log(`This is the comp: ${computer} and this is the human: ${human}`)
+    if(human === computer){
+        return 'tie'
+    } else if (human === 'rock' && computer === 'scissors' || 
+        human === 'paper' && computer === 'rock'){
+        return 'human'
+    } else if(human === 'scissors' && computer === 'paper'){
+        return 'human' 
+    } else {
+        return 'comp'
+    }
+}
 
-// }
-
-// playGame(playRound(getCompChoice(),getHumanChoice()))
-// humanScore > compScore ? alert(`Human wins. Human: ${humanScore + 1} - Computer: ${compScore}`) : alert(`Computer wins. Human: ${humanScore} - Computer: ${compScore + 1}`)
-
-
+playGame = (isWinner) => {
+    switch (isWinner) {
+        case 'human':
+            alert('Human victory')
+            humanScore++
+            break;
+        case 'comp':
+            alert('Sentient victory')
+            compScore++
+            break;
+        default:
+            alert('Tie')
+            break;
+    }
+}
